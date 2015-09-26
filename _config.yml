@@ -1,10 +1,12 @@
-name: Simply Grey
+name: 고어쿤
 markdown: redcarpet
 pygments: true
-github: https://www.github.com/exaem
-about: I am an independent developer from the sunny UK. I dabble in Ruby, play in C and I'm an avid systems administrator.
+github: https://www.github.com/gorekun
+about: 가장 최강의 위키니트
 urls:
+    - text: blog
+      url: http://blog.gorekun.com
     - text: github
-      url: https://github.com/exaem
+      url: https://github.com/gorekun
     - text: email
-      url: mailto:exaem@exaem.co.uk
+      url: mailto:gorekun.com@gmail.com
