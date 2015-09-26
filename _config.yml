@@ -1,8 +1,8 @@
 name: 고어쿤
 markdown: redcarpet
 pygments: true
-github: https://www.github.com/gorekun
-about: 가장 최강의 위키니트
+permalink: /:title/
+about: 가장 최강의 위키니트.
 urls:
     - text: blog
       url: http://blog.gorekun.com
@@ -10,3 +10,4 @@ urls:
       url: https://github.com/gorekun
     - text: email
       url: mailto:gorekun.com@gmail.com
+
