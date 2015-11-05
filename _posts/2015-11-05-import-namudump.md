@@ -68,7 +68,7 @@ CREATE TABLE `documents` (
 2. PRIMARY KEY (`id`) 뒤에 있는 comma가 삭제되어야 합니다.
 3. (옵션) index가 정의되어 있지 않음: 문서 제목이 저장되는 document 칼럼에 index를 걸어 주는 것이 여러 모로 편리합니다.
 
-~~도대체 어떻게 덤프를 뜨면 이렇게 나오는지 궁금하다.~~ ~~운영자님 내게 얘기해 봐요. 대체 왜 이랬어요?~~
+<strike>도대체 어떻게 덤프를 뜨면 이렇게 나오는지 궁금하다.</strike> <strike>운영자님 내게 얘기해 봐요. 대체 왜 이랬어요?</strike>
 
 아래와 같이 압축을 푼 dump 파일에 sed 치환 명령을 주면 위 문제들이 수정된 namu.sql 파일을 얻을 수 있습니다:
 
@@ -98,7 +98,7 @@ mysql -u${namu-username} -p${namu-password} --database=${namu-db}
 SELECT * FROM documents where document = 'iOS';
 ```
 
-아래 명령을 내리면 ios 항목이 iOS 항목으로 리다이렉트[^1] 되는 표제어임을 확인할 수 있습니다. 위에서 데이터베이스가 대소문자를 구분하도록 collate값을 설정했기 때문에 iOS와 다른 결과가 나오는 것이 맞습니다.
+아래 명령어로 ios 항목이 iOS 항목으로 리다이렉트 되는 표제어(#redirect iOS)임을 확인할 수 있습니다. 위에서 데이터베이스가 대소문자를 구분하도록 collate값을 설정했기 때문에 iOS와 다른 결과가 나오는 것이 맞습니다.
 
 ```sql
 SELECT * FROM documents where document = 'ios';
@@ -109,5 +109,3 @@ SELECT * FROM documents where document = 'ios';
 ```sql
 SELECT * FROM documents where document = 'iOs';
 ```
-
-[^1]: #redirect iOS
