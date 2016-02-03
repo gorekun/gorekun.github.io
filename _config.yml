@@ -1,5 +1,5 @@
 name: 고어쿤
-markdown: redcarpet
+markdown: kramdown
 pygments: true
 permalink: /:title/
 about: 가장 최강의 위키니트.
