@@ -1,6 +1,13 @@
+# Dependencies
+markdown:         kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  extensions:			[ footnotes ]
+gems: [ jekyll-paginate ]
+
+# Setup
 name: 고어쿤
-markdown: kramdown
-pygments: true
 permalink: /:title/
 about: 가장 최강의 위키니트.
 urls:

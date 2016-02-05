@@ -28,30 +28,30 @@ date: 2015-11-05 17:53:42
 
 우선 root 권한을 가진 계정으로 mysql에 접속합니다:
 
-```sh
+~~~sh
 mysql -u${root-username} -p${root-password}
-```
+~~~
 
 ${namu-db}이름의 데이터베이스를 생성합니다:
 
-```sql
+~~~sql
 CREATE DATABASE IF NOT EXISTS ${namu-db} DEFAULT CHARACTER SET = 'utf8' DEFAULT COLLATE 'utf8_bin';
-```
+~~~
 
 ### 사용자 생성 및 권한 부여
 
-```sql
+~~~sql
 CREATE USER ${namu-username}@localhost IDENTIFIED BY '${namu-password}';
 GRANT ALL PRIVILEGES ON namu.* TO ${namu-username}@localhost;
 FLUSH PRIVILEGES;
 EXIT;
-```
+~~~
 
 ### 덤프 파일 수정
 
 나무위키 덤프 파일의 상단 schema 정의는 아래와 같습니다:
 
-```sql
+~~~sql
 CREATE TABLE `documents` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `document` varchar(190) NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE `documents` (
   `date` int(11) NOT NULL,
   PRIMARY KEY (`id`),
 );
-```
+~~~
 
 잘 보면 아시겠지만 이 부분에 아래와 같은 문제가 있기 때문에, import 하기 전에 약간 수정을 해 줘야 합니다. (바로 import를 시도하면 아름다운 에러 메시지를 확인하시게 될 겁니다.)
 
@@ -72,40 +72,40 @@ CREATE TABLE `documents` (
 
 아래와 같이 압축을 푼 dump 파일에 sed 치환 명령을 주면 위 문제들이 수정된 namu.sql 파일을 얻을 수 있습니다:
 
-```sh
+~~~sh
 sed 's/`text` NOT NULL,'/'`text` TEXT NOT NULL,/g; s/PRIMARY KEY (`id`),'/'PRIMARY KEY (`id`),\n  INDEX `documents_document` (`document`)/g' namuwiki_20xxxxxxxxxxxx.sql > namu.sql
-```
+~~~
 
 ### import
 
 이제 남은 것은 수정된 sql 파일을 위에서 생성해 준 데이터베이스에 import 해주는 것 뿐입니다:
 
-```sh
+~~~sh
 mysql -u${namu-username} -p${namu-password} --database=${namu-db} < namu.sql
-```
+~~~
 
 ### 테스트
 
 이제 제대로 import 되었는지 확인해 보도록 하겠습니다. mysql에 접속합니다:
 
-```sh
+~~~sh
 mysql -u${namu-username} -p${namu-password} --database=${namu-db}
-```
+~~~
 
 아래 명령어로 [iOS]() 문서의 내용을 확인하실 수 있습니다.
 
-```sql
+~~~sql
 SELECT * FROM documents where document = 'iOS';
-```
+~~~
 
 아래 명령어로 ios 항목이 iOS 항목으로 리다이렉트 되는 표제어(#redirect iOS)임을 확인할 수 있습니다. 위에서 데이터베이스가 대소문자를 구분하도록 collate값을 설정했기 때문에 iOS와 다른 결과가 나오는 것이 맞습니다.
 
-```sql
+~~~sql
 SELECT * FROM documents where document = 'ios';
-```
+~~~
 
 마찬가지 이유에서 아래와 같은 명령을 내리면 결과가 나오지 않습니다.
 
-```sql
+~~~sql
 SELECT * FROM documents where document = 'iOs';
-```
+~~~
