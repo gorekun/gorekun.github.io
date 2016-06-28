@@ -4,10 +4,9 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
   extensions:			[ footnotes ]
-gems: [ jekyll-paginate ]
 
 # Setup
-name: 고어쿤
+name: 고어쿤™
 permalink: /:title/
 about: 가장 최강의 위키니트.
 urls:
